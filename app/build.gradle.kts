@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "com.coderroots.kotlinclass6week"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.coderroots.kotlinclass6week"
         minSdk = 27
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
