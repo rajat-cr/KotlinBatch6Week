@@ -6,17 +6,21 @@
     <View
         android:id="@+id/view1"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="250dp"
         android:background="@color/blue"/>
 
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
         android:layout_below="@id/view1"
         android:scaleType="fitXY"
         android:layout_marginTop="-50dp"
-        android:src="@drawable/camera"/>
+        android:src="@drawable/camera"
+        />
+
+
+
 
 
 

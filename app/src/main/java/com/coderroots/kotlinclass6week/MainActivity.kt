@@ -1,5 +1,6 @@
 package com.coderroots.kotlinclass6week
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -39,9 +40,13 @@ class MainActivity : AppCompatActivity() {
             }else if(password.text.isEmpty()){
                 password.error = "Enter Your Name"
             }else{
+                //Intent=> Implicit Intent and Explicit Intent
 
-                tvEmail.text = email.text.toString()
-                tvPassword.text = password.text.toString()
+                var intent = Intent(this,DashboardScreen::class.java)
+                startActivity(intent)
+                this.finish()
+//                tvEmail.text = email.text.toString()
+//                tvPassword.text = password.text.toString()
             }
         }
     }

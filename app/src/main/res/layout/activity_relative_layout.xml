@@ -3,35 +3,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:gravity="center"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RelativeLayoutActivity">
-
+<!--    overlapping-->
     <TextView
         android:id="@+id/tvText1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="25sp"
-        android:text="Sapna"/>
+        android:text="Login"
+        android:layout_margin="20dp"
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp"
+        />
 
-    <TextView
-        android:id="@+id/tvText2"
-        android:layout_width="wrap_content"
-        android:textSize="25sp"
-        android:layout_marginTop="10dp"
-        android:layout_below="@id/tvText1"
+    <EditText
+        android:id="@+id/etEMail"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="123121332"/>
+        android:hint="@string/enter_name"
+        android:layout_below="@id/tvText1"/>
 
-    <TextView
-        android:id="@+id/tvText3"
+    <Button
         android:layout_width="wrap_content"
+        android:layout_below="@id/etEMail"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="20dp"
         android:layout_height="wrap_content"
-        android:textSize="25sp"
-        android:layout_marginTop="10dp"
-        android:layout_below="@id/tvText2"
+        android:text="Login"/>
 
-        android:text="Left of Relative Layout"/>
+
 
 </RelativeLayout>
