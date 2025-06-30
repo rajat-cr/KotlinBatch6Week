@@ -45,8 +45,12 @@ class MainActivity : AppCompatActivity() {
                 var intent = Intent(this,DashboardScreen::class.java)
                 startActivity(intent)
                 this.finish()
-//                tvEmail.text = email.text.toString()
-//                tvPassword.text = password.text.toString()
+                tvEmail.text = email.text.toString()
+                tvPassword.text = password.text.toString()
+
+
+
+
             }
         }
     }
