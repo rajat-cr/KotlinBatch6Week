@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">KotlinClass6Week</string>
     <string name="enter_name">Enter Name</string>
+    <string name="toast">Toast</string>
+    <string name="snack_bar">SnackBar</string>
+    <string name="alert_dialog">Alert Dialog</string>
 </resources>
