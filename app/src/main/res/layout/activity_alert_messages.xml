@@ -8,11 +8,21 @@
 
     tools:context=".AlertMessagesActivity">
 
+    <TextView
+        android:id="@+id/tvText1"
+        android:textSize="20sp"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        />
+
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/toast"
+        android:layout_below="@+id/tvText1"
         android:layout_centerInParent="true"
         android:id="@+id/btnToast"/>
 
@@ -40,5 +50,16 @@
         android:layout_centerInParent="true"
         android:layout_below="@id/btnAlert"
 
+        />
+
+    <Button
+        android:id="@+id/btnSheet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bottom Sheet"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         />
 </RelativeLayout>

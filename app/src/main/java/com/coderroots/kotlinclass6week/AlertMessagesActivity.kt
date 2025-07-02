@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.coderroots.kotlinclass6week.databinding.ActivityAlertMessagesBinding
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
 
 class AlertMessagesActivity : AppCompatActivity() {
@@ -55,22 +56,44 @@ class AlertMessagesActivity : AppCompatActivity() {
 
         }
         binding.btnDialog.setOnClickListener {
-
             var dialog = Dialog(this)
                dialog.setContentView(R.layout.dialog_design)
             dialog.window?.setLayout(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
             var name = dialog.findViewById<EditText>(R.id.etName)
             var save = dialog.findViewById<Button>(R.id.btnSave)
-
+            name.setText(binding.tvText1.text.toString())
             save.setOnClickListener {
                 if(name.text.isEmpty()){
                     name.error = "Enter Your Name"
                 }else{
+                    binding.tvText1.text = name.text.toString()
+                    dialog.dismiss()
 
 
                 }
             }
             dialog.show()
+
+        }
+        binding.btnSheet.setOnClickListener {
+            var dialog = BottomSheetDialog(this)
+            dialog.setContentView(R.layout.dialog_design)
+            dialog.window?.setLayout(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+            var name = dialog.findViewById<EditText>(R.id.etName)
+            var save = dialog.findViewById<Button>(R.id.btnSave)
+            name?.setText(binding.tvText1.text.toString())
+            save?.setOnClickListener {
+                if(name?.text!!.isEmpty()){
+                    name?.error = "Enter Your Name"
+                }else{
+                    binding.tvText1.text = name?.text.toString()
+                    dialog.dismiss()
+
+
+                }
+            }
+            dialog.show()
+
 
         }
     }
