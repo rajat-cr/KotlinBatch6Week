@@ -1,8 +1,12 @@
 package com.coderroots.kotlinclass6week
 
+import android.app.Dialog
 import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.ActionBar.LayoutParams
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -48,6 +52,25 @@ class AlertMessagesActivity : AppCompatActivity() {
                 }
 
                 .show()
+
+        }
+        binding.btnDialog.setOnClickListener {
+
+            var dialog = Dialog(this)
+               dialog.setContentView(R.layout.dialog_design)
+            dialog.window?.setLayout(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+            var name = dialog.findViewById<EditText>(R.id.etName)
+            var save = dialog.findViewById<Button>(R.id.btnSave)
+
+            save.setOnClickListener {
+                if(name.text.isEmpty()){
+                    name.error = "Enter Your Name"
+                }else{
+
+
+                }
+            }
+            dialog.show()
 
         }
     }
