@@ -86,7 +86,7 @@ class AlertMessagesActivity : AppCompatActivity() {
                 if(name?.text!!.isEmpty()){
                     name?.error = "Enter Your Name"
                 }else{
-                    binding.tvText1.text = name?.text.toString()
+                    binding.tvText1.text = name.text.toString()
                     dialog.dismiss()
 
 
@@ -94,7 +94,7 @@ class AlertMessagesActivity : AppCompatActivity() {
             }
             dialog.show()
 
-
         }
+
     }
 }
