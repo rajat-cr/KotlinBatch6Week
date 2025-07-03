@@ -6,13 +6,13 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context=".FragmentActivity">
+    tools:context=".interaction.FragmentActivity">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment"
         android:layout_width="match_parent"
         android:layout_height="350dp"
-        android:name="com.coderroots.kotlinclass6week.FirstFragment"/>
+        android:name="com.coderroots.kotlinclass6week.interaction.FirstFragment"/>
 
 
     <TextView

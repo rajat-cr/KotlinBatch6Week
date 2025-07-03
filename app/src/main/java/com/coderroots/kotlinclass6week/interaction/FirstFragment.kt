@@ -1,17 +1,13 @@
-package com.coderroots.kotlinclass6week
+package com.coderroots.kotlinclass6week.interaction
 
-import android.graphics.Color
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.coderroots.kotlinclass6week.databinding.FragmentFirstBinding
+import androidx.fragment.app.Fragment
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import com.coderroots.kotlinclass6week.R
+import com.coderroots.kotlinclass6week.databinding.FragmentFirstBinding
 
 /**
  * A simple [Fragment] subclass.
@@ -32,8 +28,7 @@ class FirstFragment : Fragment(), ClickInterface {
         fragmentActivity.clickInterface = this
 
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+
         }
     }
 
@@ -83,8 +78,7 @@ class FirstFragment : Fragment(), ClickInterface {
         fun newInstance(param1: String, param2: String) =
             FirstFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+
                 }
             }
     }

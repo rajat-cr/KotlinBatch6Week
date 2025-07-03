@@ -1,4 +1,4 @@
-package com.coderroots.kotlinclass6week
+package com.coderroots.kotlinclass6week.interaction
 
 interface ClickInterface {
     fun changeColor(num : Int)

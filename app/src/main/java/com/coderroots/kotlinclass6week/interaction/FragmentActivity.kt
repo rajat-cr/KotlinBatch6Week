@@ -1,10 +1,11 @@
-package com.coderroots.kotlinclass6week
+package com.coderroots.kotlinclass6week.interaction
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.coderroots.kotlinclass6week.R
 import com.coderroots.kotlinclass6week.databinding.ActivityFragmentBinding
 
 class FragmentActivity : AppCompatActivity() {
