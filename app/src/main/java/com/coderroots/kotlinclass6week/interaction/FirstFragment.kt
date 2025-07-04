@@ -83,8 +83,8 @@ class FirstFragment : Fragment(), ClickInterface {
             }
     }
 
-    override fun changeColor(num: Int) {
-        println("Call or not: $num")
+    override fun changeColor() {
+
         binding.mainLayout.setBackgroundColor(resources.getColor(R.color.red))
     }
 }
