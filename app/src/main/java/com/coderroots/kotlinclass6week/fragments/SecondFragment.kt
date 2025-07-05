@@ -5,7 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.Toast
 import com.coderroots.kotlinclass6week.R
+import com.coderroots.kotlinclass6week.databinding.FragmentSecondBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,9 +24,14 @@ class SecondFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    lateinit var binding: FragmentSecondBinding
+    lateinit var fragmentActivity: FragmentActivity
+    lateinit var arrayAdapter: ArrayAdapter<String>
+    var array = arrayListOf("Rudhar","Rajat","Sonia","Vijay","Surbhi")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        fragmentActivity = activity as FragmentActivity
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
@@ -35,7 +43,30 @@ class SecondFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_second, container, false)
+     binding = FragmentSecondBinding.inflate(layoutInflater)
+        arrayAdapter = ArrayAdapter(fragmentActivity,android.R.layout.simple_list_item_1,array)
+        binding.lvList.adapter = arrayAdapter
+
+        binding.fabBtn.setOnClickListener {
+            array.add("Sukhraj")
+            Toast.makeText(fragmentActivity,"Click", Toast.LENGTH_SHORT).show()
+            arrayAdapter.notifyDataSetChanged()
+
+            println("Check Array: $array")
+        }
+
+        binding.lvList.setOnItemClickListener { parent, view, position, id ->
+            array.set(position,"IPhone")
+            arrayAdapter.notifyDataSetChanged()
+        }
+        binding.lvList.setOnItemLongClickListener { parent, view, position, id ->
+
+
+            return@setOnItemLongClickListener true
+        }
+
+
+        return binding.root
     }
 
     companion object {
