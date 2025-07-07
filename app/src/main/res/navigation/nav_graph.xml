@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph.xml"
-    app:startDestination="@id/firstFragment">
+    app:startDestination="@id/listViewFragment">
 
     <fragment
         android:id="@+id/firstFragment"
@@ -15,4 +15,9 @@
         android:name="com.coderroots.kotlinclass6week.fragments.SecondFragment"
         android:label="fragment_second"
         tools:layout="@layout/fragment_second" />
+    <fragment
+        android:id="@+id/listViewFragment"
+        android:name="com.coderroots.kotlinclass6week.fragments.ListViewFragment"
+        android:label="fragment_list_view"
+        tools:layout="@layout/fragment_list_view" />
 </navigation>

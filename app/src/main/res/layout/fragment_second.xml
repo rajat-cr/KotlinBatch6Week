@@ -6,20 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".fragments.SecondFragment">
 
-    <ListView
-        android:id="@+id/lvList"
-        android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:layout_height="match_parent"/>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/fabBtn"
-        android:layout_alignParentEnd="true"
-        android:src="@drawable/add_ic"
-        android:layout_margin="10dp"
-        android:layout_alignParentBottom="true"/>
 
 
 

@@ -25,13 +25,9 @@ class SecondFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     lateinit var binding: FragmentSecondBinding
-    lateinit var fragmentActivity: FragmentActivity
-    lateinit var arrayAdapter: ArrayAdapter<String>
-    var array = arrayListOf("Rudhar","Rajat","Sonia","Vijay","Surbhi")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        fragmentActivity = activity as FragmentActivity
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
@@ -44,26 +40,8 @@ class SecondFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
      binding = FragmentSecondBinding.inflate(layoutInflater)
-        arrayAdapter = ArrayAdapter(fragmentActivity,android.R.layout.simple_list_item_1,array)
-        binding.lvList.adapter = arrayAdapter
 
-        binding.fabBtn.setOnClickListener {
-            array.add("Sukhraj")
-            Toast.makeText(fragmentActivity,"Click", Toast.LENGTH_SHORT).show()
-            arrayAdapter.notifyDataSetChanged()
-
-            println("Check Array: $array")
-        }
-
-        binding.lvList.setOnItemClickListener { parent, view, position, id ->
-            array.set(position,"IPhone")
-            arrayAdapter.notifyDataSetChanged()
-        }
-        binding.lvList.setOnItemLongClickListener { parent, view, position, id ->
-
-
-            return@setOnItemLongClickListener true
-        }
+        
 
 
         return binding.root
