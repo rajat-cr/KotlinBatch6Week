@@ -1,12 +1,17 @@
 package com.coderroots.kotlinclass6week.fragments
 
+import android.app.AlertDialog
+import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.ActionBar.LayoutParams
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.coderroots.kotlinclass6week.R
+import com.coderroots.kotlinclass6week.databinding.DialogDesignBinding
 import com.coderroots.kotlinclass6week.databinding.FragmentRecyclerBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -19,7 +24,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [RecyclerFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class RecyclerFragment : Fragment() {
+class RecyclerFragment : Fragment(), ClickInterface {
     lateinit var binding : FragmentRecyclerBinding
     lateinit var recyclerAdapter: RecyclerAdapter
     // TODO: Rename and change types of parameters
@@ -42,7 +47,7 @@ class RecyclerFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentRecyclerBinding.inflate(layoutInflater)
-        recyclerAdapter = RecyclerAdapter(studentList, requireActivity(),this)
+        recyclerAdapter = RecyclerAdapter(studentList,this)
         binding.rvList.layoutManager = LinearLayoutManager(requireContext())
         binding.rvList.adapter = recyclerAdapter
 
@@ -54,10 +59,68 @@ class RecyclerFragment : Fragment() {
         studentList.add(StudentModel(name = "Inderjot", rollNo = "123","123412345"))
         studentList.add(StudentModel(name = "Kuldeep", rollNo = "123","123412345"))
 
-
-
-
+        binding.fabBtn.setOnClickListener {
+              updateDialog()
+        }
         return binding.root
+    }
+
+    fun updateDialog(position : Int = -1){
+
+        var dialog = Dialog(requireActivity())
+        var dialogBinding = DialogDesignBinding.inflate(layoutInflater)
+        dialog.setContentView(dialogBinding.root)
+             5
+        if(position != -1) {
+            dialogBinding.etName.setText(studentList[position].name)
+            dialogBinding.etRollNo.setText(studentList[position].rollNo)
+            dialogBinding.etContact.setText(studentList[position].contactNo)
+        }
+
+
+        dialog.show()
+        dialog.window?.setLayout(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT)
+        dialogBinding.btnSave.setOnClickListener {
+            if (dialogBinding.etName.text.toString().isEmpty()) {
+                dialogBinding.etName.error = "Enter Your Name"
+            } else if (dialogBinding.etRollNo.text.toString().isEmpty()) {
+                dialogBinding.etRollNo.error = "Enter Your ROll NO"
+            } else if (dialogBinding.etContact.text.toString().isEmpty()) {
+                dialogBinding.etContact.error = "Enter Your Contact NO"
+            } else {
+                if (position == -1) {
+
+
+                    studentList.add(
+                        StudentModel(
+                            name = dialogBinding.etName.text.toString(),
+                            rollNo = dialogBinding.etRollNo.text.toString(),
+                            contactNo = dialogBinding.etContact.text.toString()
+                        )
+                    )
+                    recyclerAdapter.notifyDataSetChanged()
+                    dialog.dismiss()
+
+                }
+                else{
+
+//                    studentList.set(position, StudentModel(
+//                        name = dialogBinding.etName.text.toString(),
+//                        rollNo = dialogBinding.etRollNo.text.toString(),
+//                        contactNo = dialogBinding.etContact.text.toString()
+//                    ))
+
+                    studentList[position] = StudentModel(
+                        name = dialogBinding.etName.text.toString(),
+                        rollNo = dialogBinding.etRollNo.text.toString(),
+                        contactNo = dialogBinding.etContact.text.toString()
+                    )
+                    recyclerAdapter.notifyDataSetChanged()
+                    dialog.dismiss()
+                }
+            }
+        }
+
     }
 
     companion object {
@@ -78,5 +141,28 @@ class RecyclerFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    override fun update(position: Int) {
+        updateDialog(position)
+
+        Toast.makeText(context, "${studentList[position].name}", Toast.LENGTH_SHORT).show()
+
+
+    }
+
+    override fun delete(position: Int) {
+        AlertDialog.Builder(requireContext())
+            .setTitle("Delete")
+            .setMessage("You want to Delete it")
+            .setPositiveButton("Delete"){_,_->
+                studentList.removeAt(position)
+                recyclerAdapter.notifyDataSetChanged()
+
+            }
+            .setNegativeButton("Cancel"){_,_->
+
+            }
+            .show()
     }
 }

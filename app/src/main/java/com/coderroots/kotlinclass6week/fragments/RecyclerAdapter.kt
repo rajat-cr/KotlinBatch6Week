@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.coderroots.kotlinclass6week.R
 import com.coderroots.kotlinclass6week.databinding.BaseViewBinding
 
-class RecyclerAdapter(var studentList : ArrayList<StudentModel>,var context : Context,) : RecyclerView.Adapter<RecyclerAdapter.ViewAdapter>() {
+class RecyclerAdapter(var studentList : ArrayList<StudentModel>, var clickInterface: ClickInterface) : RecyclerView.Adapter<RecyclerAdapter.ViewAdapter>() {
 //    class ViewAdapter(var binding: BaseViewBinding): RecyclerView.ViewHolder(binding.root) {
 class ViewAdapter(var view : View): RecyclerView.ViewHolder(view) {
 
@@ -43,7 +43,14 @@ class ViewAdapter(var view : View): RecyclerView.ViewHolder(view) {
         contact.text = studentList[position].contactNo
 
         holder.itemView.setOnClickListener {
-            Toast.makeText(context, "$position",Toast.LENGTH_SHORT).show()
+            clickInterface.update(position)
+
+        }
+        holder.itemView.setOnLongClickListener {
+            clickInterface.delete(position)
+
+            return@setOnLongClickListener true
+
         }
 
 
