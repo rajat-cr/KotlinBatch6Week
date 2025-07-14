@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.coderroots.kotlinclass6week.R
 import com.coderroots.kotlinclass6week.databinding.DialogDesignBinding
 import com.coderroots.kotlinclass6week.databinding.FragmentRecyclerBinding
+import com.coderroots.kotlinclass6week.fragments.roomdb.RoomDataBases
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,6 +28,7 @@ private const val ARG_PARAM2 = "param2"
 class RecyclerFragment : Fragment(), ClickInterface {
     lateinit var binding : FragmentRecyclerBinding
     lateinit var recyclerAdapter: RecyclerAdapter
+    lateinit var roomDB : RoomDataBases
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -47,17 +49,18 @@ class RecyclerFragment : Fragment(), ClickInterface {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentRecyclerBinding.inflate(layoutInflater)
+        roomDB = RoomDataBases.getDatabase(requireContext())
         recyclerAdapter = RecyclerAdapter(studentList,this)
         binding.rvList.layoutManager = LinearLayoutManager(requireContext())
         binding.rvList.adapter = recyclerAdapter
 
-        studentList.add(StudentModel(name = "Ankush", rollNo = "123","123412345"))
-        studentList.add(StudentModel(name = "Vijay", rollNo = "123","123412345"))
-        studentList.add(StudentModel(name = "Rajay", rollNo = "123","123412345"))
-        studentList.add(StudentModel(name = "Sapna", rollNo = "123","123412345"))
-        studentList.add(StudentModel(name = "Rudhar", rollNo = "123","123412345"))
-        studentList.add(StudentModel(name = "Inderjot", rollNo = "123","123412345"))
-        studentList.add(StudentModel(name = "Kuldeep", rollNo = "123","123412345"))
+//        studentList.add(StudentModel(name = "Ankush", rollNo = "123","123412345"))
+//        studentList.add(StudentModel(name = "Vijay", rollNo = "123","123412345"))
+//        studentList.add(StudentModel(name = "Rajay", rollNo = "123","123412345"))
+//        studentList.add(StudentModel(name = "Sapna", rollNo = "123","123412345"))
+//        studentList.add(StudentModel(name = "Rudhar", rollNo = "123","123412345"))
+//        studentList.add(StudentModel(name = "Inderjot", rollNo = "123","123412345"))
+//        studentList.add(StudentModel(name = "Kuldeep", rollNo = "123","123412345"))
 
         binding.fabBtn.setOnClickListener {
               updateDialog()
@@ -89,16 +92,12 @@ class RecyclerFragment : Fragment(), ClickInterface {
                 dialogBinding.etContact.error = "Enter Your Contact NO"
             } else {
                 if (position == -1) {
-
-
-                    studentList.add(
-                        StudentModel(
-                            name = dialogBinding.etName.text.toString(),
-                            rollNo = dialogBinding.etRollNo.text.toString(),
-                            contactNo = dialogBinding.etContact.text.toString()
-                        )
+                   var studentModel =  StudentModel(
+                        name = dialogBinding.etName.text.toString(),
+                        rollNo = dialogBinding.etRollNo.text.toString(),
+                        contactNo = dialogBinding.etContact.text.toString()
                     )
-                    recyclerAdapter.notifyDataSetChanged()
+                    roomDB.userDao().insertUser(studentModel)
                     dialog.dismiss()
 
                 }
@@ -110,11 +109,8 @@ class RecyclerFragment : Fragment(), ClickInterface {
 //                        contactNo = dialogBinding.etContact.text.toString()
 //                    ))
 
-                    studentList[position] = StudentModel(
-                        name = dialogBinding.etName.text.toString(),
-                        rollNo = dialogBinding.etRollNo.text.toString(),
-                        contactNo = dialogBinding.etContact.text.toString()
-                    )
+
+
                     recyclerAdapter.notifyDataSetChanged()
                     dialog.dismiss()
                 }

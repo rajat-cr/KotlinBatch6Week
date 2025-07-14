@@ -45,8 +45,8 @@ class BaseFragment : Fragment() {
         listAdapter = ListBaseAdapter(studentList)
         binding.lvList.adapter = listAdapter
 
-        studentList.add(StudentModel(name = "Sapna","12345","1234567890"))
-        studentList.add(StudentModel(name = "Rudhar","2121","1234512345"))
+//        studentList.add(StudentModel(name = "Sapna","12345","1234567890"))
+//        studentList.add(StudentModel(name = "Rudhar","2121","1234512345"))
         return binding.root
 
 
