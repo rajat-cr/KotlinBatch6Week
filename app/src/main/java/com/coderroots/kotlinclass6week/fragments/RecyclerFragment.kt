@@ -76,7 +76,7 @@ class RecyclerFragment : Fragment(), ClickInterface {
              5
         if(position != -1) {
             dialogBinding.etName.setText(studentList[position].name)
-            dialogBinding.etRollNo.setText(studentList[position].rollNo)
+         //   dialogBinding.etRollNo.setText(studentList[position].rollNo)
             dialogBinding.etContact.setText(studentList[position].contactNo)
         }
 
@@ -86,15 +86,13 @@ class RecyclerFragment : Fragment(), ClickInterface {
         dialogBinding.btnSave.setOnClickListener {
             if (dialogBinding.etName.text.toString().isEmpty()) {
                 dialogBinding.etName.error = "Enter Your Name"
-            } else if (dialogBinding.etRollNo.text.toString().isEmpty()) {
-                dialogBinding.etRollNo.error = "Enter Your ROll NO"
             } else if (dialogBinding.etContact.text.toString().isEmpty()) {
                 dialogBinding.etContact.error = "Enter Your Contact NO"
             } else {
                 if (position == -1) {
                    var studentModel =  StudentModel(
                         name = dialogBinding.etName.text.toString(),
-                        rollNo = dialogBinding.etRollNo.text.toString(),
+                    //    rollNo = dialogBinding.etRollNo.text.toString(),
                         contactNo = dialogBinding.etContact.text.toString()
                     )
                     roomDB.userDao().insertUser(studentModel)

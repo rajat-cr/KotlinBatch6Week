@@ -19,12 +19,12 @@
         android:layout_height="wrap_content"
         android:hint="Enter Your Name"/>
 
-    <EditText
-        android:id="@+id/etRollNo"
-        android:layout_width="match_parent"
-        android:layout_margin="10dp"
-        android:layout_height="wrap_content"
-        android:hint="Enter Your ROll No"/>
+<!--    <EditText-->
+<!--        android:id="@+id/etRollNo"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_margin="10dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="Enter Your ROll No"/>-->
 
     <EditText
         android:id="@+id/etContact"
