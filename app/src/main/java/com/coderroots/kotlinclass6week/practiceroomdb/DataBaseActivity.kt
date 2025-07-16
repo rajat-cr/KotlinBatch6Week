@@ -7,6 +7,7 @@ import androidx.appcompat.app.ActionBar.LayoutParams
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.coderroots.kotlinclass6week.R
 import com.coderroots.kotlinclass6week.databinding.ActivityDataBaseBinding
 import com.coderroots.kotlinclass6week.databinding.DialogDesignBinding
@@ -14,6 +15,8 @@ import com.coderroots.kotlinclass6week.databinding.DialogDesignBinding
 class DataBaseActivity : AppCompatActivity() {
     lateinit var binding : ActivityDataBaseBinding
     lateinit var userDatabase : UserDatabase
+    lateinit var databaseAdapter: DatabaseAdapter
+    var userList = ArrayList<UserModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -26,6 +29,10 @@ class DataBaseActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        databaseAdapter = DatabaseAdapter(userList)
+        binding.rvList.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
+        binding.rvList.adapter = databaseAdapter
+        getUserData()
 
         binding.fabBtn.setOnClickListener {
             var dialog = Dialog(this)
@@ -40,11 +47,18 @@ class DataBaseActivity : AppCompatActivity() {
                 }else{
                     var userModel = UserModel(userName = dialogBinding.etName.text.toString(), userContact = dialogBinding.etContact.text.toString())
                     userDatabase.userDao().insertUser(userModel)
+                    getUserData()
                     dialog.dismiss()
 
                 }
             }
               dialog.show()
         }
+    }
+
+    fun getUserData(){
+        userList.clear()
+        userList.addAll(userDatabase.userDao().getUserData())
+        databaseAdapter.notifyDataSetChanged()
     }
 }
