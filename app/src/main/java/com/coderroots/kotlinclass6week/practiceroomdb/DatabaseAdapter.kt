@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.coderroots.kotlinclass6week.databinding.PracticeViewBinding
 import com.coderroots.kotlinclass6week.fragments.RecyclerAdapter
 
-class DatabaseAdapter(var userList : ArrayList<UserModel>) : RecyclerView.Adapter<DatabaseAdapter.ViewHolder>() {
+class DatabaseAdapter(var userList : ArrayList<UserModel>, var clickInterface: ClickInterface) : RecyclerView.Adapter<DatabaseAdapter.ViewHolder>() {
 
     class ViewHolder(var binding : PracticeViewBinding) :  RecyclerView.ViewHolder(binding.root){
 
@@ -26,5 +26,14 @@ class DatabaseAdapter(var userList : ArrayList<UserModel>) : RecyclerView.Adapte
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
        holder.binding.tvName.text = userList[position].userName
         holder.binding.tvContact.text = userList[position].userContact
+
+        holder.itemView.setOnClickListener {
+            clickInterface.updateUser(position)
+        }
+        holder.itemView.setOnLongClickListener {
+            clickInterface.deleteUser(position)
+
+            return@setOnLongClickListener true
+        }
     }
 }
