@@ -3,6 +3,8 @@ package com.coderroots.kotlinclass6week.practiceroomdb
 import android.app.Dialog
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContract
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.ActionBar.LayoutParams
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +20,7 @@ class DataBaseActivity : AppCompatActivity(), ClickInterface {
     lateinit var userDatabase : UserDatabase
     lateinit var databaseAdapter: DatabaseAdapter
     var userList = ArrayList<UserModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
