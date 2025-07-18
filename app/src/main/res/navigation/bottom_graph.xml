@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/bottomFragment"
-        android:name="com.coderroots.kotlinclass6week.BottomFragment"
+        android:name="com.coderroots.kotlinclass6week.bottomnavigation.BottomFragment"
         android:label="fragment_bottom"
         tools:layout="@layout/fragment_bottom" />
     <fragment
         android:id="@+id/settingFragment"
-        android:name="com.coderroots.kotlinclass6week.SettingFragment"
+        android:name="com.coderroots.kotlinclass6week.bottomnavigation.SettingFragment"
         android:label="fragment_setting"
         tools:layout="@layout/fragment_setting" />
 </navigation>
