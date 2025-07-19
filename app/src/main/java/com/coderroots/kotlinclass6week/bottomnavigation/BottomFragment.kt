@@ -1,11 +1,20 @@
 package com.coderroots.kotlinclass6week.bottomnavigation
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
+import androidx.core.content.PermissionChecker
 import androidx.fragment.app.Fragment
 import com.coderroots.kotlinclass6week.R
+import com.coderroots.kotlinclass6week.databinding.FragmentBottomBinding
+import java.security.Permission
 
 /**
  * A simple [Fragment] subclass.
@@ -14,6 +23,25 @@ import com.coderroots.kotlinclass6week.R
  */
 class BottomFragment : Fragment() {
     // TODO: Rename and change types of parameters
+    lateinit var binding : FragmentBottomBinding
+    var imageUri : Uri? = null
+
+
+    var galleryPermission = registerForActivityResult(ActivityResultContracts.RequestPermission()){ isGranted ->
+        if(isGranted){
+            Toast.makeText(requireContext(),"Permission Granted",Toast.LENGTH_SHORT).show()
+
+        }else {
+            Toast.makeText(requireContext(), "Permission Not Granted", Toast.LENGTH_SHORT).show()
+        }
+    }
+    var galleryPick = registerForActivityResult(ActivityResultContracts.GetContent()){uri->
+        uri.let {
+          //  imageUri = it
+            binding.ivImage.setImageURI(it)
+        }
+
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +56,23 @@ class BottomFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_bottom, container, false)
+        binding = FragmentBottomBinding.inflate(layoutInflater)
+        binding.ivImage.setImageURI(imageUri)
+        binding.btnImage.setOnClickListener {
+            if(ContextCompat.checkSelfPermission(requireContext(),Manifest.permission.READ_MEDIA_IMAGES) == PackageManager.PERMISSION_GRANTED){
+                println("Check SelectedImage: $imageUri")
+//                binding.ivImage.setImageURI(imageUri)
+                galleryPick.launch("image/*")
+
+
+
+            }else{
+                galleryPermission.launch(Manifest.permission.READ_MEDIA_IMAGES)
+
+            }
+
+        }
+        return return binding.root
     }
 
     companion object {
