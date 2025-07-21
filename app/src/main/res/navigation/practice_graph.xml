@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/practice_graph.xml"
+    app:startDestination="@id/firstPracticeFragment">
+
+    <fragment
+        android:id="@+id/firstPracticeFragment"
+        android:name="com.coderroots.kotlinclass6week.FirstPracticeFragment"
+        android:label="fragment_first_practice"
+        tools:layout="@layout/fragment_first_practice" />
+    <fragment
+        android:id="@+id/secondPracticeFragment"
+        android:name="com.coderroots.kotlinclass6week.SecondPracticeFragment"
+        android:label="fragment_second_practice"
+        tools:layout="@layout/fragment_second_practice" />
+</navigation>

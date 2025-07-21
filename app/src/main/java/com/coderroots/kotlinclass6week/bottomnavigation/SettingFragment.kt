@@ -1,11 +1,17 @@
 package com.coderroots.kotlinclass6week.bottomnavigation
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.coderroots.kotlinclass6week.R
+import com.coderroots.kotlinclass6week.databinding.FragmentSettingBinding
 
 /**
  * A simple [Fragment] subclass.
@@ -14,6 +20,25 @@ import com.coderroots.kotlinclass6week.R
  */
 class SettingFragment : Fragment() {
     // TODO: Rename and change types of parameters
+
+    lateinit var binding : FragmentSettingBinding
+
+
+    var getPermission = registerForActivityResult(ActivityResultContracts.RequestPermission()){ isGranted->
+        if(isGranted){
+            Toast.makeText(requireContext(),"Permission Granted",Toast.LENGTH_SHORT).show()
+        }else{
+            Toast.makeText(requireContext(),"Permission Denied",Toast.LENGTH_SHORT).show()
+        }
+
+
+    }
+
+    var getImage = registerForActivityResult(ActivityResultContracts.GetContent()){  uri->
+        binding.ivImage.setImageURI(uri)
+
+
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +52,26 @@ class SettingFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_setting, container, false)
+        binding = FragmentSettingBinding.inflate(layoutInflater)
+
+        binding.btnGallery.setOnClickListener {
+            if(ContextCompat.checkSelfPermission(requireContext(),Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
+                println("Congratulation Gallery")
+                getImage.launch("image/*")
+            }else{
+                getPermission.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+
+            }
+
+            //Customer => customerName, customerContact, customerMail;
+            // Stock => image, stockName, quantity, perItemPrice;
+            // Bill => CustomerName, totalBill, { stock,stock };
+
+
+        }
+
+        return binding.root
+
     }
 
     companion object {

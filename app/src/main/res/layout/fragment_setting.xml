@@ -1,17 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@color/black"
     tools:context=".bottomnavigation.SettingFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <ImageView
+        android:id="@+id/ivImage"
         android:layout_width="match_parent"
         android:textColor="@color/white"
         android:textSize="20sp"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:src="@mipmap/ic_launcher"
+        android:scaleType="fitXY"
+        android:layout_height="400dp"
+         />
 
-</FrameLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:id="@+id/btnGallery"
+        android:text="Gallery"/>
+
+</LinearLayout>
