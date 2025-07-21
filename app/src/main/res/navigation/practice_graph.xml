@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/firstPracticeFragment"
-        android:name="com.coderroots.kotlinclass6week.FirstPracticeFragment"
+        android:name="com.coderroots.kotlinclass6week.practiceBottom.FirstPracticeFragment"
         android:label="fragment_first_practice"
         tools:layout="@layout/fragment_first_practice" />
     <fragment
         android:id="@+id/secondPracticeFragment"
-        android:name="com.coderroots.kotlinclass6week.SecondPracticeFragment"
+        android:name="com.coderroots.kotlinclass6week.practiceBottom.SecondPracticeFragment"
         android:label="fragment_second_practice"
         tools:layout="@layout/fragment_second_practice" />
 </navigation>
