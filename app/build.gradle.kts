@@ -51,10 +51,13 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.navigation.fragment)
+    implementation(libs.generativeai)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation ("androidx.room:room-runtime:2.5.2")
     annotationProcessor ("androidx.room:room-compiler:2.5.2")
     kapt ("androidx.room:room-compiler:2.5.2")
+
+    implementation("com.google.genai:google-genai:1.9.0")
 }

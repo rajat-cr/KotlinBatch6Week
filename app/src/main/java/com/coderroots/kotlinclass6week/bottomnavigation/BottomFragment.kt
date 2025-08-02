@@ -2,8 +2,10 @@ package com.coderroots.kotlinclass6week.bottomnavigation
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,8 +14,12 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.content.PermissionChecker
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.coderroots.kotlinclass6week.R
 import com.coderroots.kotlinclass6week.databinding.FragmentBottomBinding
+import com.google.ai.client.generativeai.GenerativeModel
+import com.google.ai.client.generativeai.type.content
+import kotlinx.coroutines.launch
 import java.security.Permission
 
 /**
@@ -25,6 +31,8 @@ class BottomFragment : Fragment() {
     // TODO: Rename and change types of parameters
     lateinit var binding : FragmentBottomBinding
     var imageUri : Uri? = null
+    lateinit var generativeModel : GenerativeModel
+    private var GEMINIKEY = "AIzaSyDvdV_QoWoXZMd_R0YAe08O3hRQsLRC7NA"
 
 
     var galleryPermission = registerForActivityResult(ActivityResultContracts.RequestPermission()){ isGranted ->
@@ -38,9 +46,25 @@ class BottomFragment : Fragment() {
     var galleryPick = registerForActivityResult(ActivityResultContracts.GetContent()){uri->
         uri.let {
           //  imageUri = it
-            binding.ivImage.setImageURI(it)
+          //  binding.ivImage.setImageURI(it)
+            var bitmap = MediaStore.Images.Media.getBitmap(requireContext().contentResolver,it)
+            binding.ivImage.setImageBitmap(bitmap)
+            analyzeImage(bitmap,"Describe Image and identity of any object presents")
         }
 
+    }
+
+    private fun analyzeImage(bitmap: Bitmap, prompt: String) {
+        lifecycleScope.launch {
+            var response = generativeModel.generateContent(
+                content {
+                    image(bitmap)
+                    text(prompt)
+                }
+            )
+            println("Check Response of Image: ${response.text}")
+            binding.tvText.text = response.text
+        }
     }
 
 
@@ -57,6 +81,10 @@ class BottomFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentBottomBinding.inflate(layoutInflater)
+        generativeModel = GenerativeModel(
+            modelName = "gemini-1.5-flash",
+            apiKey = GEMINIKEY
+        )
         binding.ivImage.setImageURI(imageUri)
         binding.btnImage.setOnClickListener {
             if(ContextCompat.checkSelfPermission(requireContext(),Manifest.permission.READ_MEDIA_IMAGES) == PackageManager.PERMISSION_GRANTED){
